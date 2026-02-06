@@ -14,6 +14,8 @@ interface UseFlipCardReturn {
   showLoader: boolean;
   /** Whether the card is flipped to show content */
   flipIn: boolean;
+  /** Manually control the flip state */
+  setFlipIn: (value: boolean) => void;
   /** Opacity for loader content (spinner/text) - 0 when fading or flipping */
   loaderContentOpacity: number;
   /** Opacity for weather/content - 0 when fading out */
@@ -22,7 +24,7 @@ interface UseFlipCardReturn {
 
 export function useFlipCard({
   loading,
-  hasContent,
+  hasContent
 }: UseFlipCardOptions): UseFlipCardReturn {
   const [loaderFadingOut, setLoaderFadingOut] = useState(false);
   const [flipIn, setFlipIn] = useState(false);
@@ -45,8 +47,9 @@ export function useFlipCard({
   }, [loading, hasContent]);
 
   // When loading starts: fade out content, then reset and fade in loader
+  // Only flip to loader if we don't have content yet
   useEffect(() => {
-    if (loading && flipIn) {
+    if (loading && flipIn && !hasContent) {
       queueMicrotask(() => setWeatherFadingOut(true));
       const resetTimer = setTimeout(() => {
         setFlipIn(false);
@@ -58,7 +61,7 @@ export function useFlipCard({
       }, FADE_MS);
       return () => clearTimeout(resetTimer);
     }
-  }, [loading, flipIn]);
+  }, [loading, flipIn, hasContent]);
 
   const showLoader = loading || loaderFadingOut;
 
@@ -70,7 +73,8 @@ export function useFlipCard({
   return {
     showLoader,
     flipIn,
+    setFlipIn,
     loaderContentOpacity,
-    contentOpacity,
+    contentOpacity
   };
 }

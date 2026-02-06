@@ -27,7 +27,7 @@ function formatDay(dateStr: string): string {
 export function DayForecastCard({
   day,
   displayUnit,
-  numbersClass,
+  numbersClass
 }: DayForecastCardProps) {
   return (
     <div className="flex h-22.5 w-15 shrink-0 flex-col items-center justify-evenly gap-0.5 rounded-xl bg-day-card-bg p-1 ring-1 ring-gray-100">

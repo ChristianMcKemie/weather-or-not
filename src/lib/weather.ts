@@ -75,7 +75,7 @@ export async function fetchLocationFromZip(
       city: place["place name"],
       state: place["state abbreviation"],
       latitude: parseFloat(place.latitude),
-      longitude: parseFloat(place.longitude),
+      longitude: parseFloat(place.longitude)
     };
   } catch {
     return null;
@@ -109,15 +109,15 @@ export async function fetchWeather(
         date,
         tempMax: data.daily.temperature_2m_max[i],
         tempMin: data.daily.temperature_2m_min[i],
-        weatherCode: data.daily.weather_code[i],
+        weatherCode: data.daily.weather_code[i]
       }));
 
     return {
       current: {
         temperature: data.current.temperature_2m,
-        weatherCode: data.current.weather_code,
+        weatherCode: data.current.weather_code
       },
-      forecast,
+      forecast
     };
   } catch {
     return null;
@@ -135,7 +135,7 @@ export async function fetchWeatherByZip(
 
   return {
     location,
-    ...weather,
+    ...weather
   };
 }
 

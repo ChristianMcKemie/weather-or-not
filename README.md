@@ -142,7 +142,7 @@ This ensures the entire UI scales smoothly while maintaining proportions across 
 
 6. **State Management**: Uses React Context (`WeatherProvider`) for global weather state. Simple and sufficient for this single-page app. For larger apps, consider Zustand or Redux.
 
-7. **Animation Approach**: 
+7. **Animation Approach**:
    - Flip card uses CSS 3D transforms for smooth card flip effect
    - Temperature changes use opacity transitions (250ms fade)
    - Loading states use fade-out/flip-in sequence
@@ -152,7 +152,7 @@ This ensures the entire UI scales smoothly while maintaining proportions across 
 
 8. **ESLint Version**: Using ESLint 9 (not 10) because `eslint-config-next` and `eslint-plugin-react` are not yet compatible with ESLint 10's API changes.
 
-9. **Component Patterns**: 
+9. **Component Patterns**:
    - Used `WeatherIcon` wrapper component to avoid "component created during render" lint warnings
    - Wrapped synchronous `setState` calls in `queueMicrotask()` to avoid cascading render warnings
    - All components follow React best practices
@@ -167,11 +167,12 @@ This ensures the entire UI scales smoothly while maintaining proportions across 
 
 13. **Toggle Design**: Simple horizontal toggle switch (40px × 25px) with purple accent. Labels don't change color when active to reduce visual noise.
 
-14. **Accessibility**: 
-   - All interactive elements are keyboard accessible
-   - Focus states use purple ring with 2px offset
-   - ARIA labels on icons
-   - Proper semantic HTML
+14. **Accessibility**:
+
+- All interactive elements are keyboard accessible
+- Focus states use purple ring with 2px offset
+- ARIA labels on icons
+- Proper semantic HTML
 
 ## Deployment
 

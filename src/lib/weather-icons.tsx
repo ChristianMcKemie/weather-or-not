@@ -12,7 +12,7 @@ import {
   LuCloudRain,
   LuCloudSnow,
   LuSnowflake,
-  LuCloudLightning,
+  LuCloudLightning
 } from "react-icons/lu";
 import type { IconType } from "react-icons";
 
@@ -44,7 +44,7 @@ const weatherIconMap: Record<number, IconType> = {
   86: LuSnowflake,
   95: LuCloudLightning,
   96: LuCloudLightning,
-  99: LuCloudLightning,
+  99: LuCloudLightning
 };
 
 export function getWeatherIcon(code: number): IconType {

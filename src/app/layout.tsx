@@ -6,16 +6,16 @@ import "./globals.css";
 const poppins = Poppins({
   weight: ["400", "500"],
   variable: "--font-poppins",
-  subsets: ["latin"],
+  subsets: ["latin"]
 });
 
 export const metadata: Metadata = {
   title: "Weather App",
-  description: "Search weather by US ZIP code",
+  description: "Search weather by US ZIP code"
 };
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {

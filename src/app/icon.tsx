@@ -16,7 +16,7 @@ export default function Icon() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#fff",
+        background: "#fff"
       }}
     >
       <img src={sunDataUrl} width={400} height={400} alt="" />

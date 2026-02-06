@@ -39,7 +39,7 @@ interface ZipSearchProps {
 export function ZipSearch({
   onSearch,
   isLoading,
-  searchError = false,
+  searchError = false
 }: ZipSearchProps) {
   const [zipCode, setZipCode] = useState("");
   const [validationError, setValidationError] = useState<string | null>(null);

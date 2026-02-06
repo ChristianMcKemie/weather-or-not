@@ -6,7 +6,7 @@ import {
   useContext,
   useEffect,
   useRef,
-  useState,
+  useState
 } from "react";
 import { fetchWeatherByZip } from "@/lib/weather";
 import type { WeatherData } from "@/lib/weather";
@@ -84,7 +84,7 @@ export function WeatherProvider({ children }: { children: React.ReactNode }) {
     clearError,
     unit,
     search,
-    toggleUnit,
+    toggleUnit
   };
 
   return (

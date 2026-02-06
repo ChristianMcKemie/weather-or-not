@@ -58,7 +58,7 @@ export default function Home() {
             transform: `scale(${scale})`,
             transformOrigin: "top center",
             // Add a bit of margin bottom because scale doesn't affect flow layout height
-            marginBottom: `${(scale - 1) * 300}px`,
+            marginBottom: `${(scale - 1) * 300}px`
           }}
           className={`flex flex-col items-center gap-8 transition-opacity duration-500 ease-out ${
             isReady ? "opacity-100" : "opacity-0"
@@ -74,7 +74,7 @@ export default function Home() {
               <div
                 ref={toastRef}
                 role="alert"
-                className="absolute bottom-full left-1/2 z-10 mb-2 -translate-x-1/2 rounded-lg bg-amber-50 px-2 py-1.5 text-xs text-amber-800 shadow-lg transition-opacity duration-500"
+                className="absolute bottom-full left-1/2 z-10 mb-2 w-95 -translate-x-1/2 rounded-lg bg-amber-50 px-4 py-3 text-center text-sm text-amber-800 shadow-lg transition-opacity duration-500"
               >
                 {error}
               </div>
