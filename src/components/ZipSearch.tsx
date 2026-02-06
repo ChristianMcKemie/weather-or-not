@@ -85,7 +85,7 @@ export function ZipSearch({
             onChange={handleChange}
             placeholder="Zip Code"
             maxLength={10}
-            className="h-8 flex-1 rounded-full border-0 bg-transparent px-4 text-gray-800 placeholder:text-sm placeholder:font-semibold placeholder:text-gray-500 transition-shadow duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple focus:ring-offset-2"
+            className="h-8 min-w-0 flex-1 rounded-full border-0 bg-transparent px-4 text-gray-800 placeholder:text-sm placeholder:font-semibold placeholder:text-gray-500 transition-shadow duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple focus:ring-offset-2"
             disabled={isLoading}
             aria-invalid={!!validationError}
             aria-describedby={
