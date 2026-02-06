@@ -1,0 +1,64 @@
+@import "tailwindcss";
+@import "../tokens/colors.css";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-purple: var(--color-purple);
+  --color-light-grey: #f4f5f8;
+  --color-day-card-bg: #f7f7f7;
+  --color-toggle-bg: #d9d9d9;
+  --font-sans: var(--font-poppins);
+  --font-mono: var(--font-poppins);
+  --animate-shake: shake 0.5s ease-in-out;
+  --animate-flip-in: flipIn 0.5s ease-out forwards;
+}
+
+@keyframes flipIn {
+  from {
+    transform: rotateY(90deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-4px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-poppins), sans-serif;
+}

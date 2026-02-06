@@ -1,0 +1,18 @@
+/**
+ * Design tokens - colors
+ * Purple: RGB 74, 46, 139 (#4A2E8B)
+ * Light grey (background): RGB 244, 245, 248 (#F4F5F8)
+ * Day card background: RGB 247, 247, 247 (#F7F7F7)
+ * Toggle background: RGB 217, 217, 217 (#D9D9D9)
+ */
+
+:root {
+  --color-purple: rgb(74, 46, 139);
+  --color-purple-hex: #4a2e8b;
+  --color-light-grey: rgb(244, 245, 248);
+  --color-light-grey-hex: #f4f5f8;
+  --color-day-card-bg: rgb(247, 247, 247);
+  --color-day-card-bg-hex: #f7f7f7;
+  --color-toggle-bg: rgb(217, 217, 217);
+  --color-toggle-bg-hex: #d9d9d9;
+}
