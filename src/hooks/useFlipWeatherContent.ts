@@ -37,16 +37,20 @@ export function useFlipWeatherContent({
         // Showing back, need to flip to front with new content
         setFrontContent(weather);
         setFlipIn(false);
-        // Delay updating displayWeather until after flip completes
+        // Update back content after flip completes, but keep front content
         const timer = setTimeout(() => {
           setDisplayWeather(weather);
-          setFrontContent(null);
         }, 500);
         return () => clearTimeout(timer);
       } else if (displayWeather !== null && !showingBack) {
         // Showing front, need to flip to back with new content
         setDisplayWeather(weather);
         setFlipIn(true);
+        // Clear front content after flip completes
+        const timer = setTimeout(() => {
+          setFrontContent(null);
+        }, 500);
+        return () => clearTimeout(timer);
       } else {
         // Initial load
         queueMicrotask(() => setDisplayWeather(weather));
