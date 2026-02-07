@@ -1,5 +1,7 @@
 # Weather App
 
+https://w347h3r.netlify.app
+
 A weather application built with Next.js that allows users to search for weather by US ZIP code. Displays current temperature, location, weather icon, and a 5-day forecast with Fahrenheit/Celsius toggle.
 
 ## Features
@@ -175,8 +177,6 @@ This ensures the entire UI scales smoothly while maintaining proportions across 
 - Proper semantic HTML
 
 ## Deployment
-
-https://w347h3r.netlify.app
 
 ```bash
 npx vercel
