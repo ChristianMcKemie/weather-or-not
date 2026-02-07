@@ -1,54 +1,17 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { ZipSearch } from "@/components/ZipSearch";
 import { FlipWeatherCard } from "@/components/FlipWeatherCard";
 import { TemperatureToggle } from "@/components/TemperatureToggle";
 import { useWeather } from "@/providers/WeatherProvider";
+import { useResizeScale } from "@/hooks/useResizeScale";
+import { useAutoDismissError } from "@/hooks/useAutoDismissError";
 
 export default function Home() {
   const { weather, loading, error, clearError, unit, search, toggleUnit } =
     useWeather();
-  const [scale, setScale] = useState(1);
-  const [isReady, setIsReady] = useState(false);
-
-  // Auto-dismiss toast after 5 seconds with fade out
-  const toastRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!error) return;
-    const fadeTimer = setTimeout(() => {
-      toastRef.current?.classList.add("opacity-0");
-    }, 5000);
-    const clearTimer = setTimeout(() => {
-      clearError();
-    }, 5500);
-    return () => {
-      clearTimeout(fadeTimer);
-      clearTimeout(clearTimer);
-    };
-  }, [error, clearError]);
-
-  // Handle scaling based on window width
-  useEffect(() => {
-    function handleResize() {
-      const BASE_WIDTH = 380;
-      const availableWidth = window.innerWidth - 32;
-      const effectiveWidth = Math.min(600, availableWidth);
-      const newScale = effectiveWidth / BASE_WIDTH;
-      setScale(newScale);
-    }
-
-    handleResize(); // Initial calculation
-    // Fade in after scale is applied (next frame)
-    const fadeTimer = requestAnimationFrame(() => {
-      requestAnimationFrame(() => setIsReady(true));
-    });
-    window.addEventListener("resize", handleResize);
-    return () => {
-      cancelAnimationFrame(fadeTimer);
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const { scale, isReady } = useResizeScale();
+  const toastRef = useAutoDismissError(error, clearError);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-light-grey overflow-x-hidden">

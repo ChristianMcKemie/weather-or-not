@@ -97,7 +97,14 @@ export function ZipSearch({
             disabled={isLoading || !isValid}
             className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-purple text-white transition-shadow duration-200 ease-in-out hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-purple focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            <FiSearch className="h-4 w-4" aria-hidden />
+            {isLoading ? (
+              <div
+                className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"
+                aria-hidden
+              />
+            ) : (
+              <FiSearch className="h-4 w-4" aria-hidden />
+            )}
           </button>
         </div>
         {validationError && (

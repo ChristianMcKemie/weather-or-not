@@ -7,6 +7,8 @@ const FADE_MS = 300;
 interface UseFlipCardOptions {
   loading: boolean;
   hasContent: boolean;
+  /** When true, skip auto flip-in on load end (caller handles flip timing) */
+  skipFlipInOnLoadEnd?: boolean;
 }
 
 interface UseFlipCardReturn {
@@ -24,7 +26,8 @@ interface UseFlipCardReturn {
 
 export function useFlipCard({
   loading,
-  hasContent
+  hasContent,
+  skipFlipInOnLoadEnd = false
 }: UseFlipCardOptions): UseFlipCardReturn {
   const [loaderFadingOut, setLoaderFadingOut] = useState(false);
   const [flipIn, setFlipIn] = useState(false);
@@ -32,10 +35,18 @@ export function useFlipCard({
   const [loaderFadingIn, setLoaderFadingIn] = useState(true);
   const prevLoadingRef = useRef(loading);
 
-  // Sequence: loader fades out, then flip runs
+  // Sequence: loader fades out, then flip runs (unless caller handles it)
   useEffect(() => {
-    if (prevLoadingRef.current && !loading && hasContent) {
-      queueMicrotask(() => setLoaderFadingOut(true));
+    if (
+      prevLoadingRef.current &&
+      !loading &&
+      hasContent &&
+      !skipFlipInOnLoadEnd
+    ) {
+      queueMicrotask(() => {
+        setWeatherFadingOut(false);
+        setLoaderFadingOut(true);
+      });
       const flipTimer = setTimeout(() => {
         prevLoadingRef.current = false;
         setLoaderFadingOut(false);
@@ -44,7 +55,7 @@ export function useFlipCard({
       return () => clearTimeout(flipTimer);
     }
     prevLoadingRef.current = loading;
-  }, [loading, hasContent]);
+  }, [loading, hasContent, skipFlipInOnLoadEnd]);
 
   // When loading starts: fade out content, then reset and fade in loader
   // Only flip to loader if we don't have content yet
