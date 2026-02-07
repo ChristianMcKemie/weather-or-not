@@ -31,12 +31,15 @@ export function WeatherProvider({ children }: { children: React.ReactNode }) {
   const [error, setError] = useState<string | null>(null);
   const [unit, setUnit] = useState<"celsius" | "fahrenheit">("fahrenheit");
   const lastSearchedZipRef = useRef<string | null>(null);
+  const requestIdRef = useRef(0);
 
   const loadWeather = useCallback(async (zipCode: string) => {
+    const id = ++requestIdRef.current;
     setLoading(true);
     setError(null);
     try {
       const data = await fetchWeatherByZip(zipCode);
+      if (id !== requestIdRef.current) return;
       if (data) {
         setWeather(data);
         setError(null);
@@ -46,9 +49,10 @@ export function WeatherProvider({ children }: { children: React.ReactNode }) {
         );
       }
     } catch {
+      if (id !== requestIdRef.current) return;
       setError("Something went wrong. Please try again.");
     } finally {
-      setLoading(false);
+      if (id === requestIdRef.current) setLoading(false);
     }
   }, []);
 
