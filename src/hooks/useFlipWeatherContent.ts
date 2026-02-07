@@ -34,14 +34,21 @@ export function useFlipWeatherContent({
     if (weather !== displayWeather) {
       const showingBack = flipIn;
       if (displayWeather !== null && showingBack) {
+        // Showing back, need to flip to front with new content
         setFrontContent(weather);
         setFlipIn(false);
-        setDisplayWeather(weather);
+        // Delay updating displayWeather until after flip completes
+        const timer = setTimeout(() => {
+          setDisplayWeather(weather);
+          setFrontContent(null);
+        }, 500);
+        return () => clearTimeout(timer);
       } else if (displayWeather !== null && !showingBack) {
+        // Showing front, need to flip to back with new content
         setDisplayWeather(weather);
         setFlipIn(true);
-        setFrontContent(null);
       } else {
+        // Initial load
         queueMicrotask(() => setDisplayWeather(weather));
       }
     }
