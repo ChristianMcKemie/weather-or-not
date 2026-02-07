@@ -50,18 +50,19 @@ export function WeatherCard({ data, unit, contentOnly }: WeatherCardProps) {
     <>
       {/* Location, temperature, and icon - icon container matches city + temp height */}
       <div className="grid grid-cols-[1fr_auto] items-stretch gap-4">
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1.5">
           <p className="mb-0 ml-1.5 text-xs font-bold uppercase tracking-wide text-gray-700">
             {data.location.city}, {data.location.state}
           </p>
-          <div className="flex items-start gap-1">
+          <div className="flex items-start">
             <span
-              className={`inline-block tabular-nums ml-1.5 text-[85px] font-[450] leading-none tracking-[3px] text-purple ${numbersClass}`}
+              className={`w-25 inline-block tabular-nums ml-1.5 text-[76px] font-[450] leading-none tracking-[3px] text-purple ${numbersClass}`}
+              style={{ transform: "scaleY(1.15)" }}
             >
               {temp}
             </span>
             <span
-              className={`self-start text-[48px] font-[450] leading-none text-purple ${numbersClass}`}
+              className={`self-start text-[38px] font-normal leading-none text-purple ${numbersClass}`}
             >
               °{displayUnit === "fahrenheit" ? "F" : "C"}
             </span>
@@ -69,7 +70,7 @@ export function WeatherCard({ data, unit, contentOnly }: WeatherCardProps) {
         </div>
         <WeatherIcon
           code={data.current.weatherCode}
-          className="h-26 w-26 text-purple"
+          className="h-24 w-24 text-purple mt-1"
           aria-hidden
         />
       </div>

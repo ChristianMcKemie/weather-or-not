@@ -38,11 +38,18 @@ export function DayForecastCard({
           aria-hidden
         />
       </div>
-      <span
-        className={`tabular-nums text-[24px] font-semibold leading-none text-black ${numbersClass}`}
-      >
-        {toDisplayTemp(day.tempMax, displayUnit)}°
-      </span>
+      <div className="flex items-start">
+        <span
+          className={`tabular-nums text-[24px] font-semibold leading-none tracking-[0.5px] text-black ${numbersClass}`}
+        >
+          {toDisplayTemp(day.tempMax, displayUnit)}
+        </span>
+        <span
+          className={`self-start text-xs font-semibold leading-none text-black ${numbersClass}`}
+        >
+          °{displayUnit === "fahrenheit" ? "F" : "C"}
+        </span>
+      </div>
       <span className="text-sm font-medium leading-none text-gray-500">
         {formatDay(day.date)}
       </span>

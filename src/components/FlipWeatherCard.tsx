@@ -25,7 +25,7 @@ export function FlipWeatherCard({
   } = useFlipWeatherContent({ loading, weather });
 
   return (
-    <div className="h-60 w-95 perspective-[1000px]">
+    <div className="h-59 w-95 perspective-[1000px]">
       <div
         className="relative h-full w-full"
         style={{
