@@ -176,7 +176,7 @@ This ensures the entire UI scales smoothly while maintaining proportions across 
 
 ## Deployment
 
-Deploy easily to [Vercel](https://vercel.com):
+https://w347h3r.netlify.app
 
 ```bash
 npx vercel
