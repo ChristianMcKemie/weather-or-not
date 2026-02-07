@@ -45,7 +45,7 @@ export function DayForecastCard({
           {toDisplayTemp(day.tempMax, displayUnit)}
         </span>
         <span
-          className={`self-start text-xs font-semibold leading-none text-black ${numbersClass}`}
+          className={`self-start text-xs font-normal leading-none text-black ${numbersClass}`}
         >
           °{displayUnit === "fahrenheit" ? "F" : "C"}
         </span>

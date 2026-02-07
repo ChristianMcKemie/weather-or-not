@@ -57,7 +57,7 @@ export function WeatherCard({ data, unit, contentOnly }: WeatherCardProps) {
           <div className="flex items-start">
             <span
               className={`w-25 inline-block tabular-nums ml-1.5 text-[76px] font-[450] leading-none tracking-[3px] text-purple ${numbersClass}`}
-              style={{ transform: "scaleY(1.15)" }}
+              style={{ transform: "scaleY(1.1)" }}
             >
               {temp}
             </span>
