@@ -5,6 +5,7 @@
  */
 import {
   LuSun,
+  LuMoon,
   LuCloudSun,
   LuCloudy,
   LuCloudFog,
@@ -54,11 +55,15 @@ export function getWeatherIcon(code: number): IconType {
 /** Wrapper to render weather icon by code - uses switch to avoid "component created during render" lint */
 export function WeatherIcon({
   code,
+  isDay = 1,
   className,
   ...props
-}: { code: number } & React.ComponentProps<IconType>) {
+}: { code: number; isDay?: number } & React.ComponentProps<IconType>) {
   const iconProps = { className, ...props };
+  const isNight = isDay === 0;
   switch (code) {
+    case 0:
+      return isNight ? <LuMoon {...iconProps} /> : <LuSun {...iconProps} />;
     case 1:
     case 2:
       return <LuCloudSun {...iconProps} />;

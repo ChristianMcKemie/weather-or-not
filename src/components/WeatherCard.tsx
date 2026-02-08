@@ -69,7 +69,9 @@ export function WeatherCard({ data, unit, contentOnly }: WeatherCardProps) {
           </div>
         </div>
         <WeatherIcon
+          key={`${data.current.weatherCode}-${data.current.isDay}`}
           code={data.current.weatherCode}
+          isDay={data.current.isDay}
           className="h-24 w-24 text-purple mt-1"
           aria-hidden
         />

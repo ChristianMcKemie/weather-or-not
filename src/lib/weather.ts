@@ -14,6 +14,8 @@ export interface LocationData {
 export interface CurrentWeather {
   temperature: number;
   weatherCode: number;
+  /** 1 = day, 0 = night (from Open-Meteo is_day) */
+  isDay: number;
 }
 
 export interface DailyForecast {
@@ -26,6 +28,8 @@ export interface DailyForecast {
 export interface WeatherData {
   location: LocationData;
   current: CurrentWeather;
+  /** Today's weather code from daily forecast (use for main icon; more representative than current) */
+  todayWeatherCode: number;
   forecast: DailyForecast[];
 }
 
@@ -45,9 +49,11 @@ interface ZippopotamResponse {
 
 // Open-Meteo API response structure
 interface OpenMeteoResponse {
+  timezone?: string;
   current: {
     temperature_2m: number;
     weather_code: number;
+    is_day?: number;
   };
   daily: {
     time: string[];
@@ -90,33 +96,44 @@ export async function fetchWeather(
     const url = new URL("https://api.open-meteo.com/v1/forecast");
     url.searchParams.set("latitude", lat.toString());
     url.searchParams.set("longitude", lon.toString());
-    url.searchParams.set("current", "temperature_2m,weather_code");
+    url.searchParams.set("current", "temperature_2m,weather_code,is_day");
     url.searchParams.set(
       "daily",
       "temperature_2m_max,temperature_2m_min,weather_code"
     );
     url.searchParams.set("timezone", "auto");
-    url.searchParams.set("forecast_days", "5");
+    url.searchParams.set("forecast_days", "7");
 
     const res = await fetch(url.toString());
     if (!res.ok) return null;
 
     const data: OpenMeteoResponse = await res.json();
 
+    const tz = data.timezone ?? "UTC";
+    const todayStr = new Date().toLocaleDateString("en-CA", {
+      timeZone: tz
+    });
+
     const forecast: DailyForecast[] = data.daily.time
-      .slice(0, 5)
       .map((date, i) => ({
         date,
         tempMax: data.daily.temperature_2m_max[i],
         tempMin: data.daily.temperature_2m_min[i],
         weatherCode: data.daily.weather_code[i]
-      }));
+      }))
+      .filter((day) => day.date > todayStr)
+      .slice(0, 5);
+
+    const todayWeatherCode =
+      data.daily.time.length > 0 ? data.daily.weather_code[0] : data.current.weather_code;
 
     return {
       current: {
         temperature: data.current.temperature_2m,
-        weatherCode: data.current.weather_code
+        weatherCode: data.current.weather_code,
+        isDay: data.current.is_day ?? 1
       },
+      todayWeatherCode,
       forecast
     };
   } catch {
